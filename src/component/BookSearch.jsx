@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
 import SearchInput from "./SearchInput";
 import BookList from "./BookList";
@@ -25,8 +26,11 @@ const BookSearch = () => {
     setLoading(true);
     setError("");
     try {
+      // Construct the search query to look for exact phrase matches
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${searchQuery}&limit=10&page=1`
+        `https://openlibrary.org/search.json?title=${encodeURIComponent(
+          searchQuery
+        )}&limit=10&page=1`
       );
       setBooks(response.data.docs);
     } catch (err) {
@@ -36,15 +40,21 @@ const BookSearch = () => {
     }
   };
 
-  const debouncedFetchBooks = useCallback(debounce(fetchBooks, 300), []);
+  const debouncedFetchBooks = useCallback(
+    debounce((searchQuery) => {
+      if (searchQuery.trim().length > 0) {
+        fetchBooks(searchQuery);
+      } else {
+        setBooks([]);
+      }
+    }, 300),
+    []
+  );
 
-  useEffect(() => {
-    if (query.length > 0) {
-      debouncedFetchBooks(query);
-    } else {
-      setBooks([]);
-    }
-  }, [query, debouncedFetchBooks]);
+  const handleQueryChange = (query) => {
+    setQuery(query);
+    debouncedFetchBooks(query);
+  };
 
   const addToBookshelf = (book) => {
     const currentBookshelf =
@@ -55,17 +65,19 @@ const BookSearch = () => {
       const updatedBookshelf = [...currentBookshelf, book];
       localStorage.setItem("bookshelf", JSON.stringify(updatedBookshelf));
       setBookshelfKeys([...bookshelfKeys, book.key]);
+      toast.success("Book added to your bookshelf!");
     } else {
-      alert("This book is already in your bookshelf.");
+      toast.error("This book is already in your bookshelf.");
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <SearchInput query={query} setQuery={setQuery} />
-      {loading && <Loader />}
+    <div className="container sm:ml-[7rem] py-5">
+      <Toaster position="top-right" reverseOrder={false} />
+      <SearchInput query={query} setQuery={handleQueryChange} />
+      <div className="absolute left-[55rem] pt-20">{loading && <Loader />}</div>
       {error && <ErrorMessage error={error} />}
-      {query.length === 0 ? (
+      {query.trim().length === 0 ? (
         <RandomBooks
           bookshelfKeys={bookshelfKeys}
           addToBookshelf={addToBookshelf}
@@ -77,11 +89,6 @@ const BookSearch = () => {
           addToBookshelf={addToBookshelf}
         />
       )}
-      <div className="flex justify-end mb-4">
-        <Link to="/bookshelf" className="text-blue-500 underline">
-          Go to My Bookshelf
-        </Link>
-      </div>
     </div>
   );
 };

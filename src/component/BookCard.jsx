@@ -1,34 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import "../Styles/BookCard.css";
+import bookmark from "../assets/icons/bookmark.svg";
+import bookmarkFill from "../assets/icons/bookmarkFill.svg";
 
 const BookCard = ({ book, bookshelfKeys, addToBookshelf }) => {
+  const [isBookmarked, setIsBookmarked] = useState(
+    bookshelfKeys.includes(book.key)
+  );
+
+  const handleBookmarkClick = () => {
+    if (!isBookmarked) {
+      addToBookshelf(book);
+    }
+    setIsBookmarked(!isBookmarked);
+  };
+
+  const truncateTitle = (title, wordLimit) => {
+    const words = title.split(" ");
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(" ") + "...";
+    }
+    return title;
+  };
+
+  const truncatedTitle = truncateTitle(book.title, 5);
+
   const authorNames = book.author_name
     ? book.author_name.slice(0, 2).join(", ") +
       (book.author_name.length > 2 ? "..." : "")
     : "Unknown";
 
   return (
-    <div className="h-[250px] w-[390px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-zinc-100 shadow flex justify-center items-center rounded-[8px]">
-      <div className="h-[230px] w-[370px] hover:size-full hover:bg-zinc-100 hover:text-zinc-950 bg-[#10100f] rounded-[8px] ">
-        <div className="p-5">
-          <h3 className="font-bold text-lg">{book.title}</h3>
-          <p className="text-sm">Author: {authorNames}</p>
-          <p className="text-sm">
-            First Published: {book.first_publish_year || "N/A"}
-          </p>
-          <button
-            onClick={() => addToBookshelf(book)}
-            className={`mt-2 p-2 rounded ${
-              bookshelfKeys.includes(book.key)
-                ? "bg-green-500"
-                : "bg-blue-500 text-white"
-            }`}
-            disabled={bookshelfKeys.includes(book.key)}
-          >
-            {bookshelfKeys.includes(book.key)
-              ? "Added to Bookshelf"
-              : "Add to Bookshelf"}
-          </button>
-        </div>
+    <div className="card">
+      <div onClick={handleBookmarkClick}>
+        <img
+          src={isBookmarked ? bookmarkFill : bookmark}
+          alt="Bookmark"
+          className="absolute right-2 top-2 cursor-pointer"
+        />
+      </div>
+      <div className="heading absolute bottom-0 w-4/5 px-5 pb-[2rem]">
+        <h3 className="font-bold text-[1.5rem] pb-2">{truncatedTitle}</h3>
+        <p className="text-sm">By: {authorNames}</p>
       </div>
     </div>
   );
