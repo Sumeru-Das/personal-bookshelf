@@ -40,8 +40,11 @@ const BookCard = ({ book, bookshelfKeys, addToBookshelf }) => {
         />
       </div>
       <div className="heading absolute bottom-0 w-4/5 px-5 pb-[2rem]">
-        <h3 className="font-bold text-[1.5rem] pb-2">{truncatedTitle}</h3>
+        <h3 className="font-semibol text-[2rem] pb-2 leading-[2rem] capitalize">{truncatedTitle}</h3>
         <p className="text-sm">By: {authorNames}</p>
+        <p className="text-sm">
+          First Published: {book.first_publish_year || "N/A"}
+        </p>
       </div>
     </div>
   );
