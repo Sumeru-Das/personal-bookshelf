@@ -6,3 +6,8 @@ body {
   background-color: #10100f;
 }
 
+@layer utilities {
+  .background {
+    background: linear-gradient(-25deg, #e81cff 20%, #40c9ff 100%);
+  }
+}

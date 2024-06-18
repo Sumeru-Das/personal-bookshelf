@@ -45,7 +45,7 @@ const RandomBooks = ({ bookshelfKeys, addToBookshelf }) => {
         {loading && <Loader />}
       </div>
       {error && <ErrorMessage error={error} />}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-x-[9rem] gap-y-[5rem] pt-[1rem] px-[5rem] sm:px-[.2rem]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-x-[9rem] gap-y-[5rem] pt-[3rem] px-[4.5rem] sm:px-[.2rem]">
         {randomBooks.map((book) => (
           <BookCard
             key={book.key}

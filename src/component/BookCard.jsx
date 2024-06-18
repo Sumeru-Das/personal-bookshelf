@@ -39,10 +39,10 @@ const BookCard = ({ book, bookshelfKeys, addToBookshelf }) => {
           className="absolute right-2 top-2 cursor-pointer"
         />
       </div>
-      <div className="heading absolute bottom-0 w-4/5 px-5 pb-[2rem]">
-        <h3 className="font-semibol text-[2rem] pb-2 leading-[2rem] capitalize">{truncatedTitle}</h3>
-        <p className="text-sm">By: {authorNames}</p>
-        <p className="text-sm">
+      <div className="heading absolute bottom-0 w-full px-5 pb-[2rem] ">
+        <h3 className="font-semibol text-[2rem] pb-4 leading-[2rem] capitalize">{truncatedTitle}</h3>
+        <p className="text-base">By: {authorNames}</p>
+        <p className="text-base">
           First Published: {book.first_publish_year || "N/A"}
         </p>
       </div>

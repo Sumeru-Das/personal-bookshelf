@@ -72,18 +72,10 @@ const BookSearch = () => {
   };
 
   return (
-    <div className="container sm:ml-[7rem] py-5">
-      <Toaster position="top-right" reverseOrder={false} />
+    <div className="container sm:ml-[7rem] pt-5 pb-10">
+      <Toaster position="bottom-right" reverseOrder={false} />
       <SearchInput query={query} setQuery={handleQueryChange} />
-      <div className=" flex justify-between pl-10 pt-10 capitalize">
-        <p className="text-white font-semibold text-2xl pl-[10rem]">Trending</p>
-        <p className="text-[#6B08F0] font-semibold text-2xl ">
-          Books for New Readers
-        </p>
-        <p className="text-[#6B08F0] font-semibold text-2xl pr-[4rem]">
-          Must Read Books
-        </p>
-      </div>
+
       <div className="flex justify-center items-center pt-10 text-center">
         {loading && <Loader />}
       </div>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
+
 import message from "../assets/icons/Message.svg";
+import book from "../assets/icons/book.svg";
 
 const Bookshelf = () => {
   const [bookshelf, setBookshelf] = useState([]);
@@ -30,13 +32,18 @@ const Bookshelf = () => {
 
   return (
     <div className="">
-      <header className="bg-[#6B08F0] text-white px-5 py-5 flex flex-col justify-center items-center h-[246px] gap-4 leading-6">
-        <h1 className="text-[10vw] sm:text-7xl tracking-tighter">
-          Book Search App
-        </h1>
-        <p className="text-[3vw] sm:text-2xl sm:font-normal font-semibold">
-          including the young adult dystopian novel Departures and the
-        </p>
+      <header className="bg-[#6B08F0] text-white px-5 py-5 flex justify-between items-center gap-4 leading-6">
+        <div className="flex flex-col justify-start items-center">
+          <div className="flex justify-center items-center">
+            <img src={book} alt="" className="h-10" />
+            <h1 className="text-[7vw] sm:text-4xl tracking-tighter">
+              Book Search App
+            </h1>
+          </div>
+          <p className="text-[4vw] sm:text-xl pt-2 sm:font-normal font-semibold">
+            Because You Can't Read Netflix.
+          </p>
+        </div>
         <div className="py-5 flex">
           <Link
             to="/"
@@ -45,7 +52,9 @@ const Bookshelf = () => {
             <div className="sm:h-[58px] sm:w-[80px]  bg-[#40C9FF] hidden lg:block">
               <img src={message} alt="" className="pl-4 pt-1" />
             </div>
-            <h1 className="pl-5">Go to My Booksearch</h1>
+            <h1 className="pl-5">
+              <span className="hidden lg:block">Go to My</span>Bookshelf
+            </h1>
           </Link>
         </div>
       </header>
@@ -55,11 +64,11 @@ const Bookshelf = () => {
           No book present in the shelf
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-10 px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-10 sm:px-[5.5rem] px-5">
           {bookshelf.map((book, index) => (
             <div
               key={index}
-              className="p-4 w-[540px] h-[250px] text-zinc-100 flex flex-col justify-center items-center text-center bg-gradient-to-r from-[#AC2CD3] to-[#659CF8] rounded-[12px]"
+              className="px-4 py-10 text-zinc-100 flex flex-col justify-center items-center text-center background rounded-[12px]"
             >
               <h3 className="font-semibold text-[2.5rem] leading-tight tracking-tighter">
                 {truncateTitle(book.title)}
