@@ -5,7 +5,7 @@ import tally from "../assets/icons/tally.svg";
 
 const SearchInput = ({ query, setQuery }) => {
   return (
-    <div className="relative sm:ml-[8.5rem] pt-[2rem] px-5 sm:px-0">
+    <div className="relative sm:pt-16 py-10">
       <input
         type="text"
         className="w-full py-4 px-5 border border-gray-300 rounded-[10px] bg-zinc-100 placeholder:text-black placeholder:font-semibold mb-4 focus:outline-none focus:border-black focus:ring-2 focus:ring-black"
@@ -13,14 +13,14 @@ const SearchInput = ({ query, setQuery }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <div className="absolute top-[3.9rem] right-20 transform -translate-y-1/2 hidden lg:block">
-        <img src={search} alt="" />
+      <div className="absolute top-[5.9rem] right-[9rem] transform -translate-y-1/2 hidden lg:block">
+        <img src={search} alt="Search" />
       </div>
-      <div className="absolute top-[3.9rem] right-9 transform -translate-y-1/2 hidden lg:block">
-        <img src={tally} alt="" />
+      <div className="absolute top-[5.9rem] right-[6rem] transform -translate-y-1/2 hidden lg:block">
+        <img src={tally} alt="Tally" />
       </div>
-      <div className="absolute top-[3.9rem] right-3 transform -translate-y-1/2 hidden lg:block">
-        <img src={microphone} alt="" />
+      <div className="absolute top-[5.9rem] right-[4rem] transform -translate-y-1/2 hidden lg:block">
+        <img src={microphone} alt="Microphone" />
       </div>
     </div>
   );

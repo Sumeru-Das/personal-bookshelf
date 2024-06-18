@@ -1,9 +1,11 @@
 import React from "react";
+import "../Styles/BookList.css";
+
 import BookCard from "./BookCard";
 
 const BookList = ({ books, bookshelfKeys, addToBookshelf }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-x-[9rem] gap-y-[5rem] pt-[3rem] px-[4.5rem] sm:px-[.2rem]">
+    <div className="book-list">
       {books.map((book) => (
         <BookCard
           key={book.key}
@@ -17,3 +19,5 @@ const BookList = ({ books, bookshelfKeys, addToBookshelf }) => {
 };
 
 export default BookList;
+
+// grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-5 gap-x-9 pt-3 px-4.5 sm:px-0

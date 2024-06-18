@@ -3,6 +3,8 @@ import axios from "axios";
 import BookCard from "./BookCard";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
+import "../Styles/BookList.css";
+import toast from "react-hot-toast";
 
 const RandomBooks = ({ bookshelfKeys, addToBookshelf }) => {
   const [randomBooks, setRandomBooks] = useState([]);
@@ -23,7 +25,7 @@ const RandomBooks = ({ bookshelfKeys, addToBookshelf }) => {
       setRandomBooks(books);
       localStorage.setItem("randomBooks", JSON.stringify(books));
     } catch (err) {
-      setError("Error fetching random books. Please try again.");
+      toast.error("Error fetching data. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -45,7 +47,7 @@ const RandomBooks = ({ bookshelfKeys, addToBookshelf }) => {
         {loading && <Loader />}
       </div>
       {error && <ErrorMessage error={error} />}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-x-[9rem] gap-y-[5rem] pt-[3rem] px-[4.5rem] sm:px-[.2rem]">
+      <div className="book-list">
         {randomBooks.map((book) => (
           <BookCard
             key={book.key}
@@ -60,3 +62,5 @@ const RandomBooks = ({ bookshelfKeys, addToBookshelf }) => {
 };
 
 export default RandomBooks;
+
+// grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-x-[9rem] gap-y-[5rem] pt-[3rem] px-[4.5rem] sm:px-[.2rem]

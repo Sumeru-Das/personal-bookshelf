@@ -12,7 +12,7 @@ const BookCard = ({ book, bookshelfKeys, addToBookshelf }) => {
     if (!isBookmarked) {
       addToBookshelf(book);
     }
-    setIsBookmarked(!isBookmarked);
+    setIsBookmarked(true);
   };
 
   const truncateTitle = (title, wordLimit) => {
@@ -40,7 +40,9 @@ const BookCard = ({ book, bookshelfKeys, addToBookshelf }) => {
         />
       </div>
       <div className="heading absolute bottom-0 w-full px-5 pb-[2rem] ">
-        <h3 className="font-semibol text-[2rem] pb-4 leading-[2rem] capitalize">{truncatedTitle}</h3>
+        <h3 className="font-semibol text-[2rem] pb-4 leading-[2rem] capitalize">
+          {truncatedTitle}
+        </h3>
         <p className="text-base">By: {authorNames}</p>
         <p className="text-base">
           First Published: {book.first_publish_year || "N/A"}

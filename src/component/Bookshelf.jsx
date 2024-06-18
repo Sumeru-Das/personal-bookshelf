@@ -31,16 +31,16 @@ const Bookshelf = () => {
   };
 
   return (
-    <div className="">
-      <header className="bg-[#6B08F0] text-white px-5 py-5 flex justify-between items-center gap-4 leading-6">
-        <div className="flex flex-col justify-start items-center">
+    <div className="min-h-screen">
+      <header className="bg-[#6B08F0] text-white px-4 sm:px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 leading-6">
+        <div className="flex flex-col sm:justify-start items-center">
           <div className="flex justify-center items-center">
-            <img src={book} alt="" className="h-10" />
-            <h1 className="text-[7vw] sm:text-4xl tracking-tighter">
+            <img src={book} alt="Book Icon" className="h-10" />
+            <h1 className="text-[7vw] sm:text-4xl tracking-tighter pl-2">
               Book Search App
             </h1>
           </div>
-          <p className="text-[4vw] sm:text-xl pt-2 sm:font-normal font-semibold">
+          <p className="text-[4vw] sm:text-xl pt-2 sm:pt-0 font-semibold sm:font-normal">
             Because You Can't Read Netflix.
           </p>
         </div>
@@ -49,38 +49,38 @@ const Bookshelf = () => {
             to="/"
             className="bg-zinc-100 h-[38px] sm:h-[58px] pr-5 py-5 text-black rounded-[44px] font-semibold flex items-center overflow-hidden"
           >
-            <div className="sm:h-[58px] sm:w-[80px]  bg-[#40C9FF] hidden lg:block">
-              <img src={message} alt="" className="pl-4 pt-1" />
+            <div className="sm:h-[58px] sm:w-[80px] bg-[#40C9FF] hidden lg:block">
+              <img src={message} alt="Message Icon" className="pl-4 pt-1" />
             </div>
             <h1 className="pl-5">
-              <span className="hidden lg:block">Go to My</span>Bookshelf
+              <span className="hidden lg:block">Go to My</span>Booksearch
             </h1>
           </Link>
         </div>
       </header>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="bottom-right" reverseOrder={false} />
       {bookshelf.length === 0 ? (
-        <p className="text-center text-gray-500 pt-20x">
+        <p className="text-center text-gray-500 pt-20">
           No book present in the shelf
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-10 sm:px-[5.5rem] px-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-10 px-5 sm:px-20">
           {bookshelf.map((book, index) => (
             <div
               key={index}
-              className="px-4 py-10 text-zinc-100 flex flex-col justify-center items-center text-center background rounded-[12px]"
+              className="background shadow-lg rounded-[12px] p-6 text-zinc-800 flex flex-col justify-center items-center text-center"
             >
-              <h3 className="font-semibold text-[2.5rem] leading-tight tracking-tighter">
+              <h3 className="font-semibold text-zinc-900 text-xl sm:text-2xl lg:text-3xl leading-tight tracking-tighter mb-4">
                 {truncateTitle(book.title)}
               </h3>
-              <p className="text-mb pb-5">
+              <p className="text-md sm:text-lg pb-5 font-semibold text-zinc-900 ">
                 Author: {book.author_name?.join(", ") || "Unknown"}
               </p>
               <button
                 onClick={() => removeFromBookshelf(book)}
-                className=" bg-[#40C9FF] text-black font-bold text-xl rounded-[12px] h-[50px]"
+                className="bg-[#40C9FF] text-black font-bold text-md sm:text-lg lg:text-xl rounded-[12px] h-[60px] px-5 lg:px-10"
               >
-                <h1 className="px-10">Remove from Shelf</h1>
+                Remove from Shelf
               </button>
             </div>
           ))}

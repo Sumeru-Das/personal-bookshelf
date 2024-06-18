@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import debounce from "lodash.debounce";
-import { Link } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
 import SearchInput from "./SearchInput";
@@ -34,7 +33,7 @@ const BookSearch = () => {
       );
       setBooks(response.data.docs);
     } catch (err) {
-      setError("Error fetching data. Please try again.");
+      toast.error("Error fetching data. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -72,7 +71,7 @@ const BookSearch = () => {
   };
 
   return (
-    <div className="container sm:ml-[7rem] pt-5 pb-10">
+    <div className="px-10 pb-10">
       <Toaster position="bottom-right" reverseOrder={false} />
       <SearchInput query={query} setQuery={handleQueryChange} />
 
@@ -92,6 +91,11 @@ const BookSearch = () => {
           addToBookshelf={addToBookshelf}
         />
       )}
+      <div className="flex justify-end items-center my-20 h-20">
+        <p className="text-white bg-[#6B08F0] py-4 px-8 rounded-xl border-t-2 border-l-2 cursor-pointer hover:border-none ">
+          Show more
+        </p>
+      </div>
     </div>
   );
 };

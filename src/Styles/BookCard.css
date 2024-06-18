@@ -6,6 +6,7 @@
   color: #fff;
   gap: 12px;
   border-radius: 8px;
+  flex-shrink: inherit;
 }
 
 .card::before {
@@ -33,9 +34,7 @@
   filter: blur(20px);
 }
 
-.card p:not(.heading) {
-  font-size: 14px;
-}
+
 
 .card p:last-child {
   color: #fff;
@@ -47,5 +46,5 @@
 }
 
 .card:hover::before {
-  transform: rotate(-100deg);
+  transform: rotate(-180deg);
 }
